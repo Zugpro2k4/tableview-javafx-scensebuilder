@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1 {
+            text-align: center ;
+            font-size: 20px;
+            color: #4CAF50;
+        }
+        body {
+            background-image: url('https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/168111/Originals/hinh%20nen%20may%20tinh%20dep%20(5).jpg');
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        form {
+            background-color: rgba(23, 26, 175, 0.274);
+            padding: 20px;
+            border-radius: 10px;
+            width: 50%;
+            max-width: 500px;
+        }
+        
+        
+       
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: white;
+        }
+        
+        input {
+            display: block;
+            margin-bottom: 10px;
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            
+        }
+        
+        textarea {
+            height: auto;
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+    </style>
+    <link rel="stylesheet" href="from.css">
+</head>
+<h1>Liên hệ</h1>
+<body>
+    <form method="get">
+        <label for="fullname">Họ tên</label>
+        <input type="text" name="txtfullname" id="fullname" placeholder="Nhập họ tên của bạn">
+
+        <label for="email">Email</label>
+        <input type="email" name="txtemail" id="email" placeholder="Nhập email của bạn">
+
+        <label for="phone">Số điện thoại</label>
+        <input type="tel" name="txtphone" id="phone" placeholder="Nhập số điện thoại của bạn">
+
+        <label for="message">Ý kiến</label>
+        <textarea name="txtmessage" id="message" placeholder="Nhập ý kiến của bạn"></textarea>
+        <br>
+        <input type="submit" name="txtsubmit" id="submit">
+    </form>
+</body>
+<script>
+    function validateForm() {
+        var email = document.getElementById('email').value;
+        var phone = document.getElementById('phone').value;
+
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        var phoneRegex = /^\d{10}$/;
+
+        if (!emailRegex.test(email)) {
+            alert("Vui lòng nhập email hợp lệ");
+            return false;
+        }
+
+        if (!phoneRegex.test(phone)) {
+            alert("Vui lòng nhập số điện thoại hợp lệ");
+            return false;
+        }
+
+        return true;
+    }
+</script>
+
+</html>
