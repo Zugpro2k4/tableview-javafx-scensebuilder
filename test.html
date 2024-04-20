@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Khóa học lập trình</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Khóa học lập trình</h1>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Khóa học</a></li>
+        <li><a href="#">Giới thiệu</a></li>
+        <li><a href="#" id="cartBtn">Thanh toán</a></li>
+       
+    </nav>
+  </header>
+
+  <main id="courses">
+    <h2>Danh sách khóa học</h2>
+    <ul>
+      <li>Introduction to Python</li>
+      <li>Web Development Fundamentals</li>
+      <li>JavaScript for Beginners</li>
+      <!-- Add more courses here -->
+    </ul>
+  </main>
+  
+
+  <div id="cart" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Your Cart</h2>
+      <ul id="cartItems">
+
+      </ul>
+      <button id="checkoutBtn">Checkout</button>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2024 Online ZUG Store</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
