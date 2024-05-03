@@ -1,0 +1,97 @@
+//Ho ten: Le Tuan Tu
+//MaSV: 652231
+//Lop: K65CNPMA
+//De:
+/*
+Bài 10(thctdlgtbai10.cpp): Cài đặt cấu trúc dữ liệu hàng đợi sử dụng cấu trúc lưu trữ kế tiếp
+theo kiểu quay vòng với phần tử dữ liệu là số nguyên. Sử dụng hàng đợi cho bài toán:
+Đọc vào dãy số nguyên dương từ tệp văn bản 'daysonguyen.txt', trên tệp không có thông tin về
+số phần tử của dãy. Tách dãy số thành dãy các số chẵn và dãy các số lẻ.
+*/
+#include<iostream>
+#include<fstream>
+#include<stdio.h>
+
+using namespace std;
+
+//Khai bao hang
+#define N 100
+
+//Khai bao ham cai dat cac phep toan tren hang doi
+void CQInsert(int *Q,int &F,int &R,int x);
+int CQDelete(int *Q,int &F,int &R);
+bool CQIsEmpty(const int *Q,int F,int R);
+
+//===chuong trinh chinh===
+int main()
+{
+    //Cai dat cau truc luu tru ke tiep cua hang doi
+    int Q[N];
+    int F=-1,R=-1;
+
+    //Khai bao tep vao
+    ifstream fin("daysonguyen.txt");
+
+    //Khai bao bien
+    int x;
+
+    //Doc day so tu tep, neu la so chan thi dua ra, neu la so le thi dua vao hang doi
+    cout<<"Day cac so chan tren tep la:\n";
+    while(fin>>x)
+    {
+        if(x%2==0) cout<<x<<"  ";
+        else CQInsert(Q,F,R,x);
+    }
+
+    //Dua ra day so le
+    cout<<"\n\nDay cac so le tren tep la:\n";
+    while(!CQIsEmpty(Q,F,R)) cout<<CQDelete(Q,F,R)<<"  ";
+
+    cout<<endl;
+    return 0;
+}
+//===dinh nghia ham===
+void CQInsert(int *Q,int &F,int &R,int x)
+{
+    //1.Kiem tra day
+    if(F==0 && R==N+1 || R+1==F)
+    {
+        cout<<"Hang doi da day.";
+        return;
+    }
+
+    //2.Tang R len 1
+    if(R==-1) F = R = 0;
+    else if(R==N-1) R = 0;
+    else R++;
+
+    //3.Dua x vao hang doi tai vi tri R
+    Q[R] = x;
+}
+
+int CQDelete(int *Q,int &F,int &R)
+{
+    //1.Kiem tra rong
+    if(F==-1)
+    {
+        cout<<"Hang doi da rong.";
+        return 1;
+    }
+
+    //2.Luu lai phan tu dau hang doi (loi truoc)
+    int tg = Q[F];
+
+    //3.Tang F len 1
+    if(F==R) F = R = -1;
+    else if(F==N-1) F = 0;
+    else F++;
+
+    //4.Tra ve phan tu dau hang doi da loai bo
+    return tg;
+}
+
+bool CQIsEmpty(const int *Q,int F,int R)
+{
+    return F==-1;
+}
+
