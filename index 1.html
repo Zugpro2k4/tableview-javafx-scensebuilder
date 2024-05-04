@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:mso="urn:schemas-microsoft-com:office:office"
+    xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nguyễn Quang Anh</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3242/3242257.png" type="image/x-icon">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>​
+
+    <!--[if gte mso 9]><xml>
+<mso:CustomDocumentProperties>
+<mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_SharedWithUsers msdt:dt="string">PT&#431;DWeb_K67CNPMC_N10_TH30109_HK2_2023_2024 Tha&#768;nh vi�n</mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_SharedWithUsers>
+<mso:SharedWithUsers msdt:dt="string">7;#PT&#431;DWeb_K67CNPMC_N10_TH30109_HK2_2023_2024 Tha&#768;nh vi�n</mso:SharedWithUsers>
+</mso:CustomDocumentProperties>
+</xml><![endif]-->
+</head>
+
+<body>
+
+    <style>
+        
+        h1 {
+            color: #81B368;
+            font-family: Arial;
+
+        }
+
+        .view {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+
+        }
+
+        .view .label {
+            text-align: left;
+        }
+
+        .view .p1 {
+            text-align: left;
+        }
+
+        .Send {
+            color: white;
+            background-color: #449D44;
+            border-radius: 4px;
+            padding: 6px 12px;
+            border: 0;
+            text-align: center;
+        }
+
+
+
+        .delete {
+            color: white;
+            background-color: #31B0D5;
+            padding: 6px 12px;
+            border-radius: 4px;
+            border: 0;
+            text-align: center;
+        }
+
+        .p1 {
+            line-height: 0.4;
+        }
+
+        .p1 #phone {
+            color: red;
+        }
+
+
+        #noidung {
+
+            height: 80px;
+        }
+
+        #fullname,
+        #email,
+        #sdt,
+        #noidung {
+            padding: 6px 12px;
+            background: #EDEDED;
+            border: 1px solid white;
+            width: 323px;
+            margin-bottom: 15px;
+        }
+    </style>
+    <div class="view">
+        <h1 class="h1">Liên hệ</h1>
+        <div class="p1">
+            <p>Vui lòng điền đầy đủ các thông tin vào ô dưới đây và</p>
+            <p>gửi liên hệ cho chúng tôi hoặc gọi vào số Hotline:</p>
+            <p id="phone">024.6261.7528</p>
+        </div>
+
+        <form id="contactForm">
+            <div class="label">
+                <label for="fullname">Họ tên</label>
+                <br>
+                <input type="text" name="HoTen" id="fullname" placeholder="Nhập họ tên">
+                <span class="error" id="nameError" style="display: none;">Trường này bắt buộc </span>
+            </div>
+            <div class="label">
+                <label for="email">Email</label>
+                <br>
+                <input type="email" name="email" id="email" placeholder="Nhập email">
+                <span class="error" id="emailError" style="display: none;">Trường này bắt buộc</span>
+                <br>
+            </div>
+            <div class="label">
+                <label for="sdt">Điện thoại</label>
+                <br>
+                <input type="tel" name="SDT" id="sdt" placeholder="Nhập số điện thoại">
+                <span class="error" id="numberError" style="display: none;">Trường này bắt buộc</span>
+                <br>
+            </div>
+            <div class="label">
+                <label for="noidung">Nội dung</label>
+                <br>
+                <textarea name="noidung" id="noidung" placeholder="Nhập ý kiến"></textarea>
+                <span class="error" id="contentError" style="display: none;">Trường này bắt buộc</span>
+                <br>
+            </div>
+            <button type="button" class="Send" title="Nguyễn Quang Anh"><i class="fa-regular fa-paper-plane"></i>
+                Gửi</button>
+            <button type="button" class="delete" title="Nguyễn Quang Anh"><i class="fa-solid fa-arrows-rotate"></i> Xóa
+                trắng</button>
+        </form>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $(".Send").click(function () {
+                var name = $("#fullname").val();
+                var email = $("#email").val();
+                var sdt = $("#sdt").val();
+                var noidung = $("#noidung").val();
+                if (name === "") {
+                    $("#nameError").show();
+                } else {
+                    $("#nameError").hide();
+                }
+
+                if (email === "") {
+                    $("#emailError").show();
+                } else {
+                    $("#emailError").hide();
+                }
+
+                if (sdt === "") {
+                    $("#numberError").show();
+                } else {
+                    $("#numberError").hide();
+                }
+
+                if (noidung === "") {
+                    $("#contentError").show();
+                } else {
+                    $("#contentError").hide();
+                }
+
+            });
+            $(".delete").click(function(){
+                $("#fullname").val('');
+                $("#email").val('');
+                $("#sdt").val('');
+                $("#noidung").val('');
+                $(".error").hide();
+            });
+        });
+        
+    </script>
+</body>
+
+</html>

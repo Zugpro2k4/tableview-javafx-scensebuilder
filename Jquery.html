@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nguyễn Đức Dũng</title>
+    <style>
+        h1 {
+            color: #81B368; 
+            font-family: Arial; 
+        }
+        .view {
+            display: flex; 
+            align-items: center; 
+            flex-direction: column; 
+            text-align: center; 
+        }
+        .label { text-align: left; }
+        .p1 { 
+            text-align: left; 
+            }
+        .Send, .delete { 
+            color: white; 
+            padding: 6px 12px; 
+            border-radius: 4px; 
+            border: 0; 
+            text-align: center; 
+        }
+        .Send { 
+            background-color: #449D44; 
+        }
+        .delete { 
+            background-color: #31B0D5; 
+        }
+        .p1 #phone { 
+            color: red; 
+        }
+        #noidung { 
+            height: 80px; 
+        }
+        #fullname, #email, #sdt, #noidung { 
+            padding: 6px 12px; 
+            background: #EDEDED; 
+            border: 1px solid white; 
+            width: 323px; 
+            margin-bottom: 15px; 
+        }
+        .error{
+            color: rgb(209, 48, 43);
+        }
+
+        .contact-image {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+    }
+    .contact-form {
+        background-color: rgba(255, 255, 255, 0.692);
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        padding: 10px;
+        margin: 0;
+        background-image: url('https://images.pexels.com/photos/235985/pexels-photo-235985.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    
+    </style>
+</head>
+<body>
+    <div class="contact-form ">
+    <div class="view">
+        <h1 class="h1">Liên hệ</h1>
+        <div class="p1">
+            <p>Vui lòng điền đầy đủ các thông tin vào ô dưới đây và</p>
+            <p>gửi liên hệ cho chúng tôi hoặc gọi vào số Hotline:</p>
+            <p id="phone">024.6261.7528</p>
+        </div>
+        <form id="contactForm">
+            <div class="label">
+                <label for="fullname">Họ tên</label><br>
+                <input type="text" name="HoTen" id="fullname" placeholder="Nhập họ tên">
+            </div>
+            <div class="label">
+                <label for="email">Email</label><br>
+                <input type="email" name="email" id="email" placeholder="Nhập email">
+            </div>
+            <div class="label">
+                <label for="sdt">Điện thoại</label><br>
+                <input type="tel" name="SDT" id="sdt" placeholder="Nhập số điện thoại">
+            </div>
+            <div class="label">
+                <label for="noidung">Nội dung</label><br>
+                <textarea name="noidung" id="noidung" placeholder="Nhập ý kiến"></textarea>
+            </div>
+
+            <div><p><span id="error" class="error"></span></p></div>
+            
+            <button type="button" class="Send">Gửi</button>
+            <button type="button" class="delete">Xóa trắng</button>
+        </form>
+    </div>
+</div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".Send").click(function() {
+                var name = $("#fullname").val();
+                var email = $("#email").val();
+                var sdt = $("#sdt").val();
+                var content = $("#noidung").val();
+
+                if (name === '' || email === '' || sdt === '' || content === ''){
+                    error.textContent = "Vui lòng nhập đầy đủ thông tin.";
+                    } else {
+                        alert("Gửi thành công!")
+                    }
+                    // Hiển thị span trong 1 giây trước khi ẩn
+                    error.style.display = "inline-block";
+                    setTimeout(function() {
+                    error.style.display = "none";
+                    } , 1500);
+            });
+
+            $(".delete").click(function() {
+                $("#contactForm")[0].reset();
+            });
+        });
+    </script>
+</body>
+</html>
