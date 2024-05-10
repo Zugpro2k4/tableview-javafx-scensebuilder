@@ -1,0 +1,152 @@
+//MaSV: 652231
+//Lop: K65CNPMA
+//De:
+/*
+Bài 18(thctdlgtbai18.cpp): Cài đặt và sử dụng hàng đợi lưu trữ phân tán cho bài toán sau:
+Cho tệp văn bản 'sinhvien.txt' chứa danh sách n sinh viên, mỗi sinh viên có thông tin về
+mã sinh viên, họ tên, giới tính, điểm TBC. Danh sách sinh viên trên tệp đã được sắp xếp theo
+điểm TBC giảm dần. Đọc danh sách sinh viên từ tệp, nếu là sinh viên nữ thì đưa ra màn hình,
+nếu là sinh viên nam thì đưa vào hàng đợi. Đưa danh sách sinh viên nam từ hàng đợi ra màn hình.
+Đưa ra màn hình sinh viên nam có điểm TBC cao nhất.
+*/
+#include<iostream>
+#include<fstream>
+#include<stdio.h>
+#include<string.h>
+
+using namespace std;
+
+//Khai bao kieu cau truc phan tu du lieu cua hang doi
+struct SinhVien
+{
+    char maSV[11];
+    char hoTen[31];
+    char gioiTinh[6];
+    float diemTBC;
+};
+
+//Khai bao kieu cau truc nut nho cua hang doi luu tru phan tan
+struct node
+{
+    SinhVien infor;
+    node *link;
+};
+
+//Khai bao ham cai dat cac phep toan tren hang doi
+void QInsert(node* &F,node* &R,SinhVien x);
+SinhVien QDelete(node* &F,node* &R);
+bool QIsEmpty(node* F,node* R);
+
+//===chuong trinh chinh===
+int main()
+{
+    //Cai dat cau truc luu tru phan tan cua hang doi
+    node *F=NULL,*R=NULL;
+
+    //Khai bao tep vao
+    ifstream fin("sinhvien.txt");
+
+    //Khai bao bien
+    int n;
+    SinhVien x,svTBCMax;
+    char tg[3];
+
+    //Doc so luong sv tu tep
+    fin>>n;
+
+    //Doc danh sach n sv tu tep, neu la sv nu thi dua ra man hinh, sv nam thi dua vao hang doi
+    cout<<"DANH SACH SINH VIEN\n";
+    for(int i=0;i<n;i++)
+    {
+        //Doc ky tu Enter de dua con tro tep xuong dong duoi
+        fin.getline(tg,sizeof(tg));
+
+        //Doc va tach thong tin cua 1 sv
+        fin.getline(x.maSV,sizeof(x.maSV),'\t');
+        fin.getline(x.hoTen,sizeof(x.hoTen),'\t');
+        fin.getline(x.gioiTinh,sizeof(x.gioiTinh),'\t');
+        fin>>x.diemTBC;
+
+        //Dua sv nu ra mh, sv nam vao hang doi
+        if(strcasecmp(x.gioiTinh,"Nam")==0) QInsert(F,R,x);
+        else
+        {
+            cout<<"\nMa sinh vien: "<<x.maSV;
+            cout<<"\nHo ten: "<<x.hoTen;
+            cout<<"\nGioi tinh: "<<x.gioiTinh;
+            cout<<"\nDiem TBC: "<<x.diemTBC<<endl;
+        }
+    }
+
+    //Lay sv nam co diem tbc cao nhat o dau hang doi
+    x = svTBCMax = QDelete(F,R);
+
+    //Dua danh sach sv nam tu hang doi ra mh
+    cout<<"\nMa sinh vien: "<<x.maSV;
+    cout<<"\nHo ten: "<<x.hoTen;
+    cout<<"\nGioi tinh: "<<x.gioiTinh;
+    cout<<"\nDiem TBC: "<<x.diemTBC<<endl;
+
+    while(!QIsEmpty(F,R))
+    {
+        x = QDelete(F,R);
+        cout<<"\nMa sinh vien: "<<x.maSV;
+        cout<<"\nHo ten: "<<x.hoTen;
+        cout<<"\nGioi tinh: "<<x.gioiTinh;
+        cout<<"\nDiem TBC: "<<x.diemTBC<<endl;
+    }
+
+    cout<<"\nSinh vien nam co diem tbc cao nhat la:";
+    cout<<"\nMa sinh vien: "<<svTBCMax.maSV;
+    cout<<"\nHo ten: "<<svTBCMax.hoTen;
+    cout<<"\nGioi tinh: "<<svTBCMax.gioiTinh;
+    cout<<"\nDiem TBC: "<<svTBCMax.diemTBC<<endl;
+
+    cout<<endl;
+    return 0;
+}
+//===dinh nghia ham===
+void QInsert(node* &F,node* &R,SinhVien x)
+{
+    //1.Tao nut moi chua x
+    node *N = new node;
+    N->infor = x;
+    N->link = NULL;
+
+    //2.Noi nut moi vao sau nut R
+    if(R==NULL) F = N;
+    else R->link = N;
+
+    //3.Cho R tro sang nut moi
+    R = N;
+}
+
+SinhVien QDelete(node* &F,node* &R)
+{
+    SinhVien tg;
+
+    //1.Kiem tra hang doi rong
+    if(F==NULL)
+    {
+        cout<<"Hang doi da rong.";
+        return tg;
+    }
+
+    //2.Giu lai nut dau hang doi (loi truoc)
+    tg = F->infor;
+    node *P = F;
+
+    //3.Cho F tro sang nut dung sau
+    if(F==R) F = R = NULL;
+    else F = F->link;
+
+    //4.Huy nut va tra ve phan tu da loai bo
+    delete P;
+    return tg;
+}
+
+bool QIsEmpty(node* F,node* R)
+{
+    return F==NULL;
+}
+
